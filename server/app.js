@@ -10,13 +10,6 @@ const controllers = require("./controllers");
 app.use(express.json());
 const port = process.env.PORT || 4000;
 
-const defaultCorsHeader = {
-  origin: '*',
-  methods: 'GET, POST, PUT, DELETE, OPTIONS',
-  allowedHeaders: 'Content-Type, Accept',
-  maxAge: 86400,
-};
-
 //? CORS 설정
 
 app.use(

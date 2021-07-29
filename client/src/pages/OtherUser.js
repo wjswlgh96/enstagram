@@ -44,19 +44,19 @@ const OtherUserPage = ({ loggedInUserInfo }) => {
         setActivePost(post)
     }
 
-    const handleFollow = async (bFollow) => {
+    const handleFollow = async (follow) => {
         // Update DB
         axios.post(`${serverUrl}/follow`,
-            { user_id: loggedInUserInfo.id, target_id: parseInt(userId)})
-        .then((res) => {
-            if(follow) {
-                const newFollower = [...follower, loggedInUserInfo.id]
-                setFollower(newFollower);
-            } else {
-                const newFollower = follower.filter(el => el !== loggedInUserInfo.id)
-                setFollower(newFollower);
-            }
-        });
+            { user_id: loggedInUserInfo.id, target_id: parseInt(userId) })
+            .then((res) => {
+                if (follow) {
+                    const newFollower = [...follower, loggedInUserInfo.id]
+                    setFollower(newFollower);
+                } else {
+                    const newFollower = follower.filter(el => el !== loggedInUserInfo.id)
+                    setFollower(newFollower);
+                }
+            });
     }
 
     return (
