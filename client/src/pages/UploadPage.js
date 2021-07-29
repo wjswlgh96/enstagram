@@ -5,7 +5,7 @@ import { useHistory } from 'react-router'
 
 const Upload = ({ userData, setUserWrittenPost }) => {
 
-    const [picture, setPicture] = useState("https://lh3.googleusercontent.com/proxy/k30F7mIBg5cVvGVmWwrFJHcjDdZocysk8Pc3U_oASyeP2a4Fa65S3cIDjTAFUJIX5jO_dqGwZvFeP9Ye-7AjDNdd58G2ByFWtjykJL9ZS7y1ojo8poJOQzvOFbOgk8M");
+    const [picture, setPicture] = useState("https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png");
     const [text, setText] = useState("");
 
     const hiddenFileInput = useRef(null);
@@ -42,9 +42,9 @@ const Upload = ({ userData, setUserWrittenPost }) => {
     //         };
     //     });
     // }
-    
-    async function submitPost(){
-        
+
+    async function submitPost() {
+
         const res = await axios.post('https://fpserver.click/createpost', {
             user_id: userData.id,
             content: text,
@@ -65,8 +65,8 @@ const Upload = ({ userData, setUserWrittenPost }) => {
                 <span className="upload-header">새 게시물</span>
                 <img className="upload-preview-picture" src={picture} alt="preview" />
                 <button className="post-upload-picture" onClick={inputClick}>사진 업로드</button>
-                <input type="file" accept="image/*" ref={hiddenFileInput} onChange={loadFileHandler} style={{ display: "none" }}/>
-                <textarea className="post-upload-content" placeholder="문구 입력..." value={text} onChange={inputText}/>
+                <input type="file" accept="image/*" ref={hiddenFileInput} onChange={loadFileHandler} style={{ display: "none" }} />
+                <textarea className="post-upload-content" placeholder="문구 입력..." value={text} onChange={inputText} />
                 <button className="upload-post-button" type="submit" onClick={submitPost}>공유</button>
             </div>
         </div>

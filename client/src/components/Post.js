@@ -41,16 +41,16 @@ const Post = ({ activePost, loggedInUserInfo, userInfo }) => {
             user_id: parseInt(loggedInUserInfo.id), // loggedIn user
             post_id: parseInt(activePost.id),
             value: like
-        }).then((res)=>{
+        }).then((res) => {
             // if(res.data.message === '좋아요 정보 설정 완료') {
-                if (like) { //  add user id to like_id array and return like count using array.length
-                    const newLikeList = [...likeList, loggedInUserInfo.id]
-                    setLikeList(newLikeList)
-                } else { // Decrease like count
-                    const newLikeList= [...likeList].filter(el => el !== loggedInUserInfo.id)
-                    setLikeList(newLikeList)
-                }
-            })
+            if (like) { //  add user id to like_id array and return like count using array.length
+                const newLikeList = [...likeList, loggedInUserInfo.id]
+                setLikeList(newLikeList)
+            } else { // Decrease like count
+                const newLikeList = [...likeList].filter(el => el !== loggedInUserInfo.id)
+                setLikeList(newLikeList)
+            }
+        })
         // })
     }
 
@@ -66,8 +66,6 @@ const Post = ({ activePost, loggedInUserInfo, userInfo }) => {
             content: comment,
         }).then((res) => {
 
-            // console.log("으아아아아아아아", res);
-
             if (res.data.message === '코멘트 생성 성공') {
                 const commentId = res.data.data.id;
                 const commentForStateUpdate = {
@@ -75,6 +73,8 @@ const Post = ({ activePost, loggedInUserInfo, userInfo }) => {
                     id: commentId,
                     username: loggedInUserInfo.username
                 }
+
+                console.log("commentFor", commentForStateUpdate);
                 commentHandler(commentForStateUpdate)
                 setComment('');
             }
@@ -94,16 +94,14 @@ const Post = ({ activePost, loggedInUserInfo, userInfo }) => {
         setCommentList(newCommentList)
     }
 
-    const commentDelete = (commentes) => {
+    const commentDelete = (comment) => {
         // For database update:
 
-        console.log("comments.id:", commentes);
-
         axios.delete(`${serverUrl}/deletecomment`, {
-            data: {comment_id: parseInt(comment.id),}
+            data: { comment_id: Number(comment.id) }
         }).then((res) => {
             if (res.data.message === '코멘트 삭제 완료') {
-                commentDeleteHandler(commentes);
+                commentDeleteHandler(comment);
             } else if (res.data.message === '해당하는 정보의 comment 가 없습니다') {
                 console.log("문제를 찾아라");
             }
