@@ -5,7 +5,9 @@ import { useHistory } from 'react-router'
 
 const Upload = ({ userData, setUserWrittenPost }) => {
 
-    const [picture, setPicture] = useState("https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png");
+
+    const [picture, setPicture] = useState("https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image.jpg");
+
     const [text, setText] = useState("");
 
     const hiddenFileInput = useRef(null);

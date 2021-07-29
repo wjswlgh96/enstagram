@@ -47,9 +47,10 @@ const OtherUserPage = ({ loggedInUserInfo }) => {
     const handleFollow = async (follow) => {
         // Update DB
         axios.post(`${serverUrl}/follow`,
+
             { user_id: loggedInUserInfo.id, target_id: parseInt(userId) })
             .then((res) => {
-                if (follow) {
+                if (bFollow) {
                     const newFollower = [...follower, loggedInUserInfo.id]
                     setFollower(newFollower);
                 } else {
